@@ -5,9 +5,51 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+  color: whitesmoke
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+
+
+.navbar {
+  padding: 15px;
+  padding-left: 60px;
+  height: 50px; 
+  width: 100%;
+  background-color: rgb(67, 95, 255);
+  position: fixed;
+  top: 0;
+  font-size: 1.3rem;
+  z-index: 100;
+}
+
+a {
+  color: azure;
+  text-decoration: none;
+}
+
+a:hover {
+  color: gold;
+}
+
+.link {
+  width: 100px;
+  padding: 10px;
+  margin: 10px;
+  text-decoration: none;
+  color: white;
+  height: 100%;
+}
+
+.links {
+  display: inline;
+  justify-content: space-between;
+}
+
