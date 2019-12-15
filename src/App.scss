@@ -1,47 +1,13 @@
+@mixin transform($transformation) {
+  transform: $transformation;
+  -webkit-transform: $transformation;
+  -moz-transform: $transformation;
+  -ms-transform: $transformation;
+  -o-transform: $transformation;  
+}
+
 .App {
   text-align: center;
-}
-
-body {
-  background-image:  url("https://i.pinimg.com/originals/6a/35/2e/6a352eff1e199dabd25b497b748c039c.jpg");
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  /* background-color: #282c34; */
-  background-color: black;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: #09d3ac;
-}
-
-.main {
-  padding: 20px;
-  padding-top: 60px;
-
-}
-
-.card-list {
-  justify-content: center;
-}
-
-.save-team-form {
-  margin: 5px;
-}
-
-.hero-search-form {
-  margin: 20px;
-
 }
 
 .header {
@@ -49,30 +15,76 @@ body {
   color: white;
 }
 
-h1 {
-  font-size: 3rem;
-}
+body {
+  background-image:  url("https://i.pinimg.com/originals/6a/35/2e/6a352eff1e199dabd25b497b748c039c.jpg");
 
-.hero-card {
-    h2 {
-    color: black;
+  .App-logo {
+    height: 40vmin;
+  }
+
+  .App-header {
+    background-color: black;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+  }
+
+  .main {
+    padding: 20px;
+    padding-top: 60px;
+      
+    .card-list {
+      justify-content: center;
+    }
+
+    .save-team-form {
+      margin: 5px;
+    }
+
+    .hero-search-form {
+      margin: 20px;
+
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    .hero-card {
+        h2 {
+          color: black;
+        };
+        .hero-image {
+          height: 350px;
+          overflow: hidden;
+          background-color: black;
+          img {
+            width: 100%;
+            &:hover{
+              @include transform (rotatey(-180deg));
+              transition: 0.5s;
+              // visibility: hidden;
+            }	
+        }
+          }
+        }
+       
+
+    .hero-list {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+      p {
+        color: black;
+      }
+    }
+
+    .search-placeholder img {
+      height: 60%
+    }
+
   }
 }
-
-.hero-list {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.hero-list p {
-  color: black;
-}
-
-.search-placeholder img {
-  height: 60%
-}
-
-
-

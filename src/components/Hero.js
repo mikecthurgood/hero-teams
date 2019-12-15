@@ -3,10 +3,15 @@ import { Card, Image, Button } from 'semantic-ui-react'
 
 const Hero = ({ hero, recruitHero, myTeam }) => {
 
+    const addDefaultSrc = (e) => {
+        e.target.src = require('../assets/defaultHeroImage.png')
+    }
+
     return (
         < Card className="hero-card" >
-            <Image src={hero.image.url} />
-            {/* onError={require('../assets/defaultHeroImage.png')} */}
+            <div className='hero-image'><Image src={hero.image.url} onError={addDefaultSrc} />
+
+            </div>
 
             <Card.Header><h2>{hero.name}</h2></Card.Header>
             <Card.Description>
