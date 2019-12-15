@@ -35,6 +35,10 @@ body {
   justify-content: center;
 }
 
+.save-team-form {
+  margin: 5px;
+}
+
 .hero-search-form {
   margin: 20px;
 
@@ -49,8 +53,10 @@ h1 {
   font-size: 3rem;
 }
 
-.hero-card h2 {
-  color: black;
+.hero-card {
+    h2 {
+    color: black;
+  }
 }
 
 .hero-list {
