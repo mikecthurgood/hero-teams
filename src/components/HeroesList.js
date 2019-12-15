@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Hero from './Hero'
 import { Card } from 'semantic-ui-react'
 
-const HeroesList = ({ heroes, recruitHero, myTeam, searched }) => (
-    <div className="hero-list">
+const HeroesList = ({ heroes, recruitHero, myTeam, searched, flipped, showStats }) => {
+
+
+    return <div className="hero-list">
         <Card.Group className='card-list'>
             {
                 heroes && heroes.map(hero =>
@@ -11,6 +13,8 @@ const HeroesList = ({ heroes, recruitHero, myTeam, searched }) => (
                         key={hero.id}
                         recruitHero={() => recruitHero(hero.id)}
                         myTeam={myTeam}
+                        flipped={flipped}
+                        showStats={showStats}
                     />)
             }
             {
@@ -22,6 +26,6 @@ const HeroesList = ({ heroes, recruitHero, myTeam, searched }) => (
             }
         </Card.Group>
     </div>
-)
+}
 
 export default HeroesList

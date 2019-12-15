@@ -2,7 +2,7 @@ import React from 'react'
 import SearchForm from './SearchForm'
 import HeroesList from './HeroesList'
 
-const MainContainer = ({ searchHeroes, heroes, searched, recruitHero, myTeam }) => (
+const MainContainer = ({ searchHeroes, heroes, searched, recruitHero, myTeam, flipped, showStats }) => (
     <div className="main">
         <div className="header">
             <h1>Search Heroes</h1>
@@ -12,6 +12,8 @@ const MainContainer = ({ searchHeroes, heroes, searched, recruitHero, myTeam }) 
                 searched={searched}
                 recruitHero={recruitHero}
                 myTeam={myTeam}
+                flipped={flipped}
+                showStats={showStats}
             />
         </div>
     </div>

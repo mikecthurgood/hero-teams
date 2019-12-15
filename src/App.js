@@ -14,6 +14,7 @@ const App = () => {
   const [myTeam, setMyTeam] = useState({ name: "", heroes: [] })
   const [createdTeams, setCreatedTeams] = useState([])
   const [searched, setSearched] = useState(false)
+  const [flipped, setFlipped] = useState([])
 
   useEffect(() => (API.getHeroes("").then(allHeroes => setAllHeroes(allHeroes))), [])
   useEffect(() => (API.getTeams().then(createdTeams => setCreatedTeams(createdTeams))), [])
@@ -25,6 +26,14 @@ const App = () => {
         setSearched(true)
       })
   }
+
+  const showStats = (heroId) => {
+    if (!flipped.includes(heroId)) {
+      setFlipped([...flipped, heroId])
+    } else
+      setFlipped(flipped.filter(id => heroId !== id))
+  }
+
 
   const saveTeam = (team) => {
     setCreatedTeams([...createdTeams, team])
@@ -62,7 +71,10 @@ const App = () => {
           heroes={heroes}
           searched={searched}
           recruitHero={recruitHero}
-          myTeam={myTeam} />} />
+          myTeam={myTeam}
+          flipped={flipped}
+          showStats={showStats}
+        />} />
       <Route path="/my-team" component={() =>
         <HeroTeam
           heroes={myTeam.heroes.map(hero => allHeroes.find(h => h.id === hero))}
@@ -70,6 +82,8 @@ const App = () => {
           saveTeam={saveTeam}
           recruitHero={recruitHero}
           clearTeam={clearTeam}
+          flipped={flipped}
+          showStats={showStats}
         />} />
       <Route path="/teams" component={() =>
         <AllTeams

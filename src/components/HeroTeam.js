@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Hero from './Hero'
 import { Button, Card } from 'semantic-ui-react'
 
-const HeroTeam = ({ heroes, recruitHero, myTeam, searched, clearTeam, saveTeam }) => {
+const HeroTeam = ({ heroes, recruitHero, myTeam, searched, clearTeam, saveTeam, flipped, showStats }) => {
 
     const [team, setTeam] = useState({ name: 'test', heroes: [{ name: 'test man', powers: 'testing like a boss' }] })
     const [teamName, setTeamName] = useState("")
@@ -64,6 +64,8 @@ const HeroTeam = ({ heroes, recruitHero, myTeam, searched, clearTeam, saveTeam }
                                         key={hero.id}
                                         recruitHero={() => recruitHero(hero.id)}
                                         myTeam={myTeam}
+                                        flipped={flipped}
+                                        showStats={showStats}
                                     />
                                 )
                             }
