@@ -1,12 +1,13 @@
 import React from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
 
-const Hero = (props) => {
+const Hero = ({ hero, recruitHero, myTeam }) => {
 
-    const { hero, recruitHero, myTeam } = props
     return (
         < Card className="hero-card" >
             <Image src={hero.image.url} />
+            {/* onError={require('../assets/defaultHeroImage.png')} */}
+
             <Card.Header><h2>{hero.name}</h2></Card.Header>
             <Card.Description>
                 <p>Alter-Ego: {hero.biography["full-name"] !== "" ? hero.biography["full-name"] : "None"} <br />
@@ -19,14 +20,6 @@ const Hero = (props) => {
 
         </Card >
     )
-}
-
-Hero.defaultProps = {
-    hero: {
-        image: {
-            url: require('../assets/defaultHeroImage.png')
-        }
-    }
 }
 
 export default Hero

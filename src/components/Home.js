@@ -10,18 +10,11 @@ const Home = () => {
             <header className="App-header">
                 <div className="logos">
                     <img src={avengersURL} className="App-logo" alt="logo" /> &nbsp;
-          <img src={justiceURL} className="App-logo" alt="logo" /> &nbsp;
-          <img src={xmenURL} className="App-logo" alt="logo" />
-
+                    <img src={justiceURL} className="App-logo" alt="logo" /> &nbsp;
+                    <img src={xmenURL} className="App-logo" alt="logo" />
                 </div>
-                <p>
-                    Heroes Converge. The World Is In Peril.
-        </p>
-                <a
-                    href="/create-team"
-                >
-                    Get Started
-        </a>
+                <p>Heroes Converge. The World Is In Peril.</p>
+                <a href="/create-team">Get Started</a>
             </header>
         </div>
     );

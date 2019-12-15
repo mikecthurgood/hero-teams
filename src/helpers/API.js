@@ -12,9 +12,12 @@ const configObj = (type, body = undefined) => {
     }
 }
 
-class API {
-    static getHeroes = (hero) => fetch(HEROAPI + hero).then(resp => resp.json())
-    static saveTeam = (team) => fetch(TEAMSAPI, configObj('POST', team))
-    static getTeams = () => fetch(TEAMSAPI).then(resp => resp.json())
+const getHeroes = (hero) => fetch(HEROAPI + hero).then(resp => resp.json())
+const saveTeam = (team) => fetch(TEAMSAPI, configObj('POST', team))
+const getTeams = () => fetch(TEAMSAPI).then(resp => resp.json())
+
+export default {
+    getHeroes,
+    saveTeam,
+    getTeams
 }
-export default API

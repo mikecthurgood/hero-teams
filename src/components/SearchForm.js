@@ -21,7 +21,7 @@ class SearchForm extends React.Component {
     render() {
         return (
             <>
-                <form className="hero-search-form" onSubmit={this.handleSubmit}>
+                <form className="hero-search-form" autoComplete="off" onSubmit={this.handleSubmit}>
                     <input type="text" name="hero" value={this.state.hero} onChange={this.handleChange} placeholder="Search Heroes" />
                 </form>
             </>

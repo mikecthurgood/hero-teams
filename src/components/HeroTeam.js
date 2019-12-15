@@ -1,52 +1,54 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Hero from './Hero'
-import { Button } from 'semantic-ui-react'
+import { Button, Card } from 'semantic-ui-react'
 
+const HeroTeam = ({ heroes, recruitHero, myTeam, searched, clearTeam, saveTeam }) => {
 
-class HeroTeam extends React.Component {
-    state = {
-    }
+    const [team, setTeam] = useState({ name: 'test', heroes: [{ name: 'test man', powers: 'testing like a boss' }] })
+    const [teamName, setTeamName] = useState("")
 
-    handleSubmit = e => {
+    useEffect(() => (setTeam({ heroes })), [heroes])
+
+    const handleSubmit = e => {
         e.preventDefault()
-        this.setState({
-            team: {
-                name: e.target.teamName.value,
-                heroes: [this.props.myTeam]
-            }
+        setTeam({
+            name: teamName,
+            heroes: [myTeam]
         })
+        // saveTeam(team)
     }
 
-    handleSave = () => {
-        this.props.saveTeam(this.state.team)
+    const handleChange = e => {
+        e.preventDefault()
+        setTeamName(e.target.value)
     }
 
-    render() {
-        const { heroes, recruitHero, myTeam, searched } = this.props
-        return (
+    return (
+        <>
             <div className="main">
                 <div className="header">
                     <h2>My Hero Team</h2>
-                    {!this.state.team ?
-                        <>
-                            <form onSubmit={this.handleSubmit}>
-                                <label htmlFor="teamName">Team Name: </label>
-                                <input name="teamName" type="text" placeholder="Team Name..." />
-                                <input type="submit" />
+                    {heroes.length > 0 ?
+                        <div className='save-and-clear-buttons'>
+                            <h2>{team.name}</h2>
+                            <form onSubmit={handleSubmit}>
+                                <label>Team Name: </label>
+                                <input name="teamName" onChange={handleChange} type="text" placeholder="Team Name..." />
                             </form>
-                            <br />
-                            <Button onClick={this.props.clearTeam}>Reset Team</Button>
-                        </>
-                        :
-                        <div>
-                            <h2>{this.state.team.name}</h2>
-                            <Button onClick={this.handleSave}>Save Team</Button>
-                            <Button onClick={this.props.clearTeam}>Reset Team</Button>
+                            <Button onClick={handleSubmit}>Save Team</Button>
+                            <Button onClick={clearTeam}>Clear Team</Button>
+
+                            <br /><br />
                         </div>
+                        :
+                        <>
+                            <h2>No heroes recruited yet </h2>
+                        </>
                     }
-                    <br /> <br />
+
+
                     <div className="hero-list">
-                        <div className="ui cards">
+                        <Card.Group className='card-list'>
                             {
                                 heroes && heroes.map(hero =>
                                     <Hero hero={hero}
@@ -55,19 +57,12 @@ class HeroTeam extends React.Component {
                                         myTeam={myTeam}
                                     />)
                             }
-                            {
-                                searched === true && heroes === "" && <h3>No Heroes Retrieved</h3>
-                            }
-                            {
-                                searched === false && <div className='search-placeholder'><h2>Search for a hero</h2><br />
-                                </div>
-                            }
-                        </div>
+                        </Card.Group>
                     </div>
                 </div>
             </div>
-        )
-    }
+        </>
+    )
 }
 
 export default HeroTeam
