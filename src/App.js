@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import { Route, withRouter } from 'react-router-dom';
 import Home from './components/Home'
 import MainContainer from './components/MainContainer'
@@ -11,7 +11,7 @@ const App = () => {
 
   const [allHeroes, setAllHeroes] = useState([])
   const [heroes, setHeroes] = useState([])
-  const [myTeam, setMyTeam] = useState([])
+  const [myTeam, setMyTeam] = useState({ name: "", heroes: [] })
   const [createdTeams, setCreatedTeams] = useState([])
   const [searched, setSearched] = useState(false)
 
@@ -30,25 +30,26 @@ const App = () => {
     setCreatedTeams([...createdTeams, team])
     API.saveTeam(team)
       .then(alert(`${team.name} saved to world roster. Thank you young hero.`))
-      .then(setMyTeam(team))
+      .then(setTeam(team))
   }
 
   const recruitHero = (heroID) => {
-    if (!myTeam.includes(heroID)) {
-      myTeam.length < 6 ? setMyTeam([...myTeam, heroID]) : alert('6 is the maximum team number. Please remove a member or head to the My Teams page to save your team')
+    if (!myTeam.heroes.includes(heroID)) {
+      myTeam.heroes.length < 6 ? setMyTeam({ name: "", heroes: [...myTeam.heroes, heroID] }) : alert('6 is the maximum team number. Please remove a member or head to the My Teams page to save your team')
     } else {
-      const newTeam = myTeam.filter(hero => hero !== heroID)
-      setMyTeam(newTeam)
+      const newTeam = myTeam.heroes.filter(hero => hero !== heroID)
+      setMyTeam({ name: myTeam.name, heroes: newTeam })
     }
   }
 
   const setTeam = (team) => {
-    setMyTeam(team.heroes[0])
+    setMyTeam({ name: team.name, heroes: team.heroes[0] })
     console.log(team)
+    console.log(team.heroes[0])
   }
 
   const clearTeam = () => {
-    setMyTeam([])
+    setMyTeam({ name: "", heroes: [] })
   }
   return (
 
@@ -64,7 +65,7 @@ const App = () => {
           myTeam={myTeam} />} />
       <Route path="/my-team" component={() =>
         <HeroTeam
-          heroes={myTeam.map(hero => allHeroes.find(h => h.id === hero))}
+          heroes={myTeam.heroes.map(hero => allHeroes.find(h => h.id === hero))}
           myTeam={myTeam}
           saveTeam={saveTeam}
           recruitHero={recruitHero}

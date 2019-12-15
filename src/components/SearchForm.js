@@ -1,33 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-class SearchForm extends React.Component {
+const SearchForm = ({ searchHeroes }) => {
 
-    state = {
-        hero: ""
+    const [hero, setHero] = useState("")
+
+    const handleChange = e => {
+        setHero(e.target.value)
     }
 
-    handleChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault()
-        this.props.searchHeroes(this.state.hero)
+        searchHeroes(hero)
         e.target.hero.value = ""
     }
 
-    render() {
-        return (
-            <>
-                <form className="hero-search-form" autoComplete="off" onSubmit={this.handleSubmit}>
-                    <input type="text" name="hero" value={this.state.hero} onChange={this.handleChange} placeholder="Search Heroes" />
-                </form>
-            </>
-        )
-    }
-
+    return (
+        <>
+            <form className="hero-search-form" autoComplete="off" onSubmit={handleSubmit}>
+                <input type="text" name="hero" value={hero} onChange={handleChange} placeholder="Search Heroes" />
+            </form>
+        </>
+    )
 }
 
 export default SearchForm

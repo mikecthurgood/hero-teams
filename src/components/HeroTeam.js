@@ -7,15 +7,18 @@ const HeroTeam = ({ heroes, recruitHero, myTeam, searched, clearTeam, saveTeam }
     const [team, setTeam] = useState({ name: 'test', heroes: [{ name: 'test man', powers: 'testing like a boss' }] })
     const [teamName, setTeamName] = useState("")
 
-    useEffect(() => (setTeam({ heroes })), [heroes])
+    useEffect(() => (setTeam({ name: myTeam.name, heroes })), [myTeam, heroes])
 
     const handleSubmit = e => {
         e.preventDefault()
         setTeam({
             name: teamName,
-            heroes: [myTeam]
+            heroes: [myTeam.heroes]
         })
-        // saveTeam(team)
+        saveTeam({
+            name: teamName,
+            heroes: [myTeam.heroes]
+        })
     }
 
     const handleChange = e => {
@@ -30,12 +33,17 @@ const HeroTeam = ({ heroes, recruitHero, myTeam, searched, clearTeam, saveTeam }
                     <h2>My Hero Team</h2>
                     {heroes.length > 0 ?
                         <div className='save-and-clear-buttons'>
-                            <h2>{team.name}</h2>
-                            <form onSubmit={handleSubmit}>
-                                <label>Team Name: </label>
-                                <input name="teamName" onChange={handleChange} type="text" placeholder="Team Name..." />
-                            </form>
-                            <Button onClick={handleSubmit}>Save Team</Button>
+                            {!team.name ?
+                                <>
+                                    <form onSubmit={handleSubmit} className='save-team-form'>
+                                        <label>Team Name: </label>
+                                        <input name="teamName" onChange={handleChange} type="text" placeholder="Team Name..." />
+                                    </form>
+                                    <Button onClick={handleSubmit}>Save Team</Button>
+                                </>
+                                :
+                                <h2>{team.name}</h2>
+                            }
                             <Button onClick={clearTeam}>Clear Team</Button>
 
                             <br /><br />
@@ -51,11 +59,13 @@ const HeroTeam = ({ heroes, recruitHero, myTeam, searched, clearTeam, saveTeam }
                         <Card.Group className='card-list'>
                             {
                                 heroes && heroes.map(hero =>
+                                    // console.log(hero)
                                     <Hero hero={hero}
                                         key={hero.id}
                                         recruitHero={() => recruitHero(hero.id)}
                                         myTeam={myTeam}
-                                    />)
+                                    />
+                                )
                             }
                         </Card.Group>
                     </div>

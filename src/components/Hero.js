@@ -13,8 +13,8 @@ const Hero = ({ hero, recruitHero, myTeam }) => {
                 <p>Alter-Ego: {hero.biography["full-name"] !== "" ? hero.biography["full-name"] : "None"} <br />
                     Alignment: {hero.biography.alignment}</p>
             </Card.Description>
-            <Button onClick={recruitHero} className={myTeam.includes(hero.id) ? 'negative' : 'positive'}>{
-                myTeam.includes(hero.id) ?
+            <Button onClick={recruitHero} className={myTeam.heroes.includes(hero.id) ? 'negative' : 'positive'}>{
+                myTeam.heroes.includes(hero.id) ?
                     'Drop From Team' : 'Recruit To Team'
             }</Button>
 
