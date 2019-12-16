@@ -53,8 +53,8 @@ const App = () => {
 
   const setTeam = (team) => {
     setMyTeam({ name: team.name, heroes: team.heroes[0] })
-    console.log(team)
-    console.log(team.heroes[0])
+    // console.log(team)
+    // console.log(team.heroes[0])
   }
 
   const clearTeam = () => {
