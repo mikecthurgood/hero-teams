@@ -9,7 +9,7 @@ const Hero = ({ hero, recruitHero, myTeam, flipped, showStats }) => {
 
     return (
         <>
-            {console.log(hero)}
+            {/* {console.log(hero)} */}
             < Card className="hero-card" >
                 <div className='hero-image' onClick={() => showStats(hero.id)}>
                     {!flipped.includes(hero.id) ?
