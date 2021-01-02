@@ -6,6 +6,14 @@
   -o-transform: $transformation;  
 }
 
+h1, h2, h3, h4, h5, p, ul, ol, li, span, div, button, input  {
+  font-family: 'Muli', sans-serif !important;
+}
+
+h1 {
+  font-size: 3rem;
+}  
+
 .App {
   text-align: center;
 }
@@ -18,84 +26,36 @@
 body {
   background-image:  url("https://i.pinimg.com/originals/6a/35/2e/6a352eff1e199dabd25b497b748c039c.jpg");
 
-  .App-logo {
-    height: 40vmin;
-  }
-
-  .App-header {
-    background-color: black;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-  }
-
   .main {
-    padding: 20px;
     padding-top: 60px;
-      
-    .card-list {
-      justify-content: center;
-    }
 
-    .save-team-form {
-      margin: 5px;
-    }
-
-    .hero-search-form {
-      margin: 20px;
-
-    }
-
-    h1 {
-      font-size: 3rem;
-    }
-
-    .hero-card {
-        h2 {
-          color: black;
-        };
-
-        .hero-image {
-          height: 350px;
-          overflow: hidden;
-          background-color: black;
-          img {
-            width: 100%;
-            }	
+    .header {
+      h3 {
+        margin: 0;
+      }
+      .alphabet-filter {
+        margin: 5px;
+        cursor: pointer;
+        font-weight: 100;
+        &:hover {
+          color: gold;
+          font-weight: 900;
         }
-        .hero-stats {
-          h4 {
-            text-align: left;
-            padding-left: 10%;
-          }
-          p {
-            text-align: left;
-            color: white;
-            padding-left: 10%;
-          }
-          .power-stats {
-            column-count: 2;
-
-          }
-
+        &.active {
+          color: gold;
+          font-weight: 900;
         }
       }
-       
-    .hero-list {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      justify-content: center;
-      p {
-        color: black;
-      }
     }
+     
 
     .search-placeholder img {
       height: 60%
     }
 
   }
+
+    .save-team-form {
+      margin: 5px;
+    }  
 }

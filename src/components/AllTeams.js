@@ -5,7 +5,7 @@ const AllTeams = ({ setTeam, createdTeams }) => {
 
     const handleClick = (team) => {
         setTeam(team)
-        // console.log(team)
+        console.log(team)
 
     }
     return (
@@ -13,7 +13,8 @@ const AllTeams = ({ setTeam, createdTeams }) => {
             <br /><br />
             <h2>All Teams</h2>
 
-            {createdTeams.map(team => <div key={team.id}><Link to="/my-team" ><h3 onClick={() => handleClick(team)} > {team.name} </h3></Link></div>)}
+            {/* {createdTeams.map(team => <div key={team.id}><Link to="/my-team" ><h3 onClick={() => handleClick(team)} >{team.name}</h3></Link></div>)} */}
+            {createdTeams.map(team => <div key={team.id}><h3 onClick={() => handleClick(team)} >{team.name}</h3></div>)}
         </div>
     )
 }

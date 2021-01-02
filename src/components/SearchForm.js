@@ -1,23 +1,17 @@
 import React, { useState } from 'react'
 
-const SearchForm = ({ searchHeroes }) => {
+const SearchForm = ({ searchHeroes, setSearchFilter, searchFilter }) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
     const handleChange = e => {
-        setSearchTerm(e.target.value)
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault()
-        searchHeroes(searchTerm)
-        e.target.hero.value = ""
+        setSearchFilter(e.target.value)
     }
 
     return (
         <>
-            <form className="hero-search-form" autoComplete="off" onSubmit={handleSubmit}>
-                <input type="text" name="hero" value={searchTerm} onChange={handleChange} placeholder="Search Heroes" />
+            <form className="hero-search-form" autoComplete="off" >
+                <input type="text" name="hero" value={searchFilter} onChange={handleChange} placeholder="Search Heroes" />
             </form>
         </>
     )

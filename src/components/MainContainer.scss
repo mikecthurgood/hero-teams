@@ -1,0 +1,10 @@
+.hero-search-form {
+    margin: 20px;
+    input {
+        padding: 5px;
+        border-radius: 5px;
+        &:focus {
+        outline:none;
+        }
+    }
+}

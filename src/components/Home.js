@@ -1,20 +1,40 @@
 import React from 'react';
-
-const avengersURL = 'https://images-na.ssl-images-amazon.com/images/I/51e%2Bt0Bt1WL._SL1130_.jpg'
-const justiceURL = 'https://res.cloudinary.com/teepublic/image/private/s--uU7EEqzO--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1470699398/production/designs/623110_1.jpg'
-const xmenURL = 'https://cdn.freebiesupply.com/logos/large/2x/x-men-logo-png-transparent.png'
+import './Home.scss'
+import { Link } from 'react-router-dom';
+const avengersURL = '/images/avengers.png'
+const heroesURL = '/images/heroes-logo.png'
+const justiceURL = '/images/justice-league.png'
+const tmntURL = '/images/tmnt-logo.png'
+const startrekURL = '/images/startrek-logo.png'
+const starwarsURL = '/images/starwars-logo.png'
+const xmenURL = '/images/xmen-logo.png'
 
 const Home = () => {
     return (
         <div className="App">
-            <header className="App-header">
-                <div className="logos">
-                    <img src={avengersURL} className="App-logo" alt="logo" /> &nbsp;
-                    <img src={justiceURL} className="App-logo" alt="logo" /> &nbsp;
-                    <img src={xmenURL} className="App-logo" alt="logo" />
+            <header className="welcome-screen-container">
+                <h1>Heroes Converge. The World Is In Peril.</h1>
+                <div className='get-started-container'>
+                    <Link className='get-started-link' to='/create-team'>
+                        <span className='get-started-button'>
+                            <h2>Build Your Team</h2>
+                        </span>
+                    </Link>
                 </div>
-                <p>Heroes Converge. The World Is In Peril.</p>
-                <a href="/create-team">Get Started</a>
+                <div className="logos">
+                    <div className='square-logos'>
+                        <img src={avengersURL} className="Hero-logo" alt="Avengers Logo" /> 
+                        <img src={justiceURL} className="Hero-logo" alt="Justice League Logo" /> 
+                        <img src={heroesURL} className="Hero-logo" alt="HBO Heroes Logo" /> 
+                        <img src={xmenURL} className="Hero-logo" alt="Xmen Logo" /> 
+                        <img src={startrekURL} className="Hero-logo" alt="Start Trek Logo" />
+                    </div>
+                    <div className='wide-logos'>
+                        <img src={tmntURL} className="Hero-logo" alt="TMNT Logo" /> 
+                        <img src={starwarsURL} className="Hero-logo" alt="Star Wars Logo" /> 
+                    </div>
+                </div>
+                
             </header>
         </div>
     );
