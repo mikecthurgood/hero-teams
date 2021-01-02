@@ -7,33 +7,30 @@ import NavBar from './components/NavBar'
 import HeroTeam from './components/HeroTeam'
 import API from './helpers/API'
 import AllTeams from './components/AllTeams'
+const heroList = require('./db.json')
+
 const App = () => {
 
-  const [allHeroes, setAllHeroes] = useState([])
   const [heroes, setHeroes] = useState([])
   const [myTeam, setMyTeam] = useState({ name: "", heroes: [] })
   const [createdTeams, setCreatedTeams] = useState([])
   const [searched, setSearched] = useState(false)
-  const [flipped, setFlipped] = useState([])
 
-  useEffect(() => (API.getHeroes("").then(allHeroes => setAllHeroes(allHeroes))), [])
-  useEffect(() => (API.getTeams().then(createdTeams => setCreatedTeams(createdTeams))), [])
+  useEffect(() => {
+    const graphqlHeroes = async () => {
+      const heroData = await API.graphQlgetHeroes()
+      setHeroes(heroData.sort((a, b) => (a.name > b.name) ? 1 : -1))
+      return
+    }
+    graphqlHeroes()
+  }, [])
+  useEffect(() => setCreatedTeams(heroList.teams), [])
 
   const searchHeroes = (hero) => {
-    API.getHeroes(hero)
-      .then(heroes => {
-        setHeroes(heroes)
-        setSearched(true)
-      })
+    const filteredHeroes = heroes.filter(h => h.name.toLowerCase().includes(hero.toLowerCase()))
+    setHeroes(filteredHeroes)
+    setSearched(true)
   }
-
-  const showStats = (heroId) => {
-    if (!flipped.includes(heroId)) {
-      setFlipped([...flipped, heroId])
-    } else
-      setFlipped(flipped.filter(id => heroId !== id))
-  }
-
 
   const saveTeam = (team) => {
     setCreatedTeams([...createdTeams, team])
@@ -60,36 +57,34 @@ const App = () => {
   const clearTeam = () => {
     setMyTeam({ name: "", heroes: [] })
   }
-  return (
 
+  return (
     <>
       <NavBar />
-      <Route exact path="/" component={Home} />
-      <Route path="/create-team" component={() =>
-        <MainContainer
-          searchHeroes={searchHeroes}
-          heroes={heroes}
-          searched={searched}
-          recruitHero={recruitHero}
-          myTeam={myTeam}
-          flipped={flipped}
-          showStats={showStats}
-        />} />
-      <Route path="/my-team" component={() =>
-        <HeroTeam
-          heroes={myTeam.heroes.map(hero => allHeroes.find(h => h.id === hero))}
-          myTeam={myTeam}
-          saveTeam={saveTeam}
-          recruitHero={recruitHero}
-          clearTeam={clearTeam}
-          flipped={flipped}
-          showStats={showStats}
-        />} />
-      <Route path="/teams" component={() =>
-        <AllTeams
-          createdTeams={createdTeams}
-          setTeam={setTeam}
-        />} />
+        <Route exact path="/" component={Home} />
+        <div className="main">
+        <Route path="/create-team" component={() =>
+          <MainContainer
+            searchHeroes={searchHeroes}
+            heroes={heroes}
+            searched={searched}
+            recruitHero={recruitHero}
+            myTeam={myTeam}
+          />} />
+        <Route path="/my-team" component={() =>
+          <HeroTeam
+            heroes={heroes.filter(hero => myTeam.heroes.includes(hero.id))}
+            myTeam={myTeam}
+            saveTeam={saveTeam}
+            recruitHero={recruitHero}
+            clearTeam={clearTeam}
+          />} />
+        <Route path="/teams" component={() =>
+          <AllTeams
+            createdTeams={createdTeams}
+            setTeam={setTeam}
+          />} />
+        </div>
     </>
   );
 }

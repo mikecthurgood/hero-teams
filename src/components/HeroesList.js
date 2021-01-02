@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Hero from './Hero'
 import { Card } from 'semantic-ui-react'
+import './HeroesList.scss'
 
-const HeroesList = ({ heroes, recruitHero, myTeam, searched, flipped, showStats }) => {
+const HeroesList = ({ heroes, recruitHero, myTeam, searched, showStats, searchFilter }) => {
 
 
     return <div className="hero-list">
@@ -13,17 +14,23 @@ const HeroesList = ({ heroes, recruitHero, myTeam, searched, flipped, showStats 
                         key={hero.id}
                         recruitHero={() => recruitHero(hero.id)}
                         myTeam={myTeam}
-                        flipped={flipped}
                         showStats={showStats}
+                        searchFilter={searchFilter}
                     />)
             }
+            <div className='hero-card-placeholder'></div>
+            <div className='hero-card-placeholder'></div>
+            <div className='hero-card-placeholder'></div>
+            <div className='hero-card-placeholder'></div>
+            <div className='hero-card-placeholder'></div>
+
             {
                 searched === true && heroes === "" && <h3>No Heroes Retrieved</h3>
             }
-            {
+            {/* {
                 searched === false && <div className='search-placeholder'><h2>Search for a hero</h2><br />
                 </div>
-            }
+            } */}
         </Card.Group>
     </div>
 }

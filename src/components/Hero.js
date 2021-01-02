@@ -1,19 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
-
-const Hero = ({ hero, recruitHero, myTeam, flipped, showStats }) => {
+import './Hero.scss'
+const Hero = ({ hero, recruitHero, myTeam, searchFilter }) => {
 
     const addDefaultSrc = (e) => {
         e.target.src = require('../assets/defaultHeroImage.png')
     }
 
+    const [flipped, setFlipped] = useState(false)
+    const heroHighlight = searchFilter ? `<span class='highlight'>${searchFilter.toUpperCase()}</span>` : '';
+    const heroName = searchFilter ? hero.name.toUpperCase().replace(searchFilter.toUpperCase(), heroHighlight) : hero.name.toUpperCase();
+    // const heroName = hero.name;
     return (
         <>
             {/* {console.log(hero)} */}
-            < Card className="hero-card" >
-                <div className='hero-image' onClick={() => showStats(hero.id)}>
-                    {!flipped.includes(hero.id) ?
-                        <Image src={hero.image.url} onError={addDefaultSrc} />
+            < Card className="hero-card" onClick={() => setFlipped(!flipped)}>
+                <div className='hero-image'>
+                    {!flipped ?
+                        <Image src={hero.imageUrl} onError={addDefaultSrc} />
                         :
                         <div className='hero-stats'>
                             <h4>Alter Ego: {hero.biography['full-name']}</h4>
@@ -33,7 +37,7 @@ const Hero = ({ hero, recruitHero, myTeam, flipped, showStats }) => {
 
                 </div>
 
-                <Card.Header><h2>{hero.name}</h2></Card.Header>
+                <Card.Header><h2 className='hero-name' dangerouslySetInnerHTML={{__html: `${heroName}`}} /></Card.Header>
                 <Card.Description>
                     <p>Alter-Ego: {hero.biography["full-name"] !== "" ? hero.biography["full-name"] : "None"} <br />
                         Alignment: {hero.biography.alignment}</p>
