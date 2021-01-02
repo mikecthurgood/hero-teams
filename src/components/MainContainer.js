@@ -5,7 +5,7 @@ import './MainContainer.scss'
 const MainContainer = ({ heroes, myTeam, recruitHero, searched, searchHeroes }) => {
 
     const [searchFilter, setSearchFilter] = useState('')
-    const [letterFilter, setLetterFilter] = useState('A')
+    const [letterFilter, setLetterFilter] = useState('')
     const filteredHeroes = letterFilter ? heroes.filter(hero => hero.name.charAt(0).toLowerCase() === letterFilter.toLowerCase()) : heroes;
     const searchedHeroes = searchFilter ? filteredHeroes.filter(hero => hero.name.toLowerCase().includes(searchFilter.toLowerCase())) : filteredHeroes
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
